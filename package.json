@@ -1,0 +1,27 @@
+{
+  "name": "huebot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test --bail"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/marclar/huebot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marclar/huebot/issues"
+  },
+  "homepage": "https://github.com/marclar/huebot#readme",
+  "dependencies": {
+    "bluebird": "^3.4.1",
+    "dotenv": "^2.0.0",
+    "expect.js": "^0.3.1",
+    "lodash": "^4.14.1",
+    "mocha": "^3.0.1",
+    "node-hue-api": "^2.2.0"
+  }
+}
