@@ -1,12 +1,12 @@
 'use strict';
 
-const _ = require('lodash');
-const fs = require('fs');
-const log = console.log;
-const Promise = require('bluebird');
+var _ = require('lodash');
+var fs = require('fs');
+var log = console.log;
+var Promise = require('bluebird');
 
 function Scene(api, path){
-    const me = this;
+    var me = this;
     me.api = api;
     me.config = {};
     me.frame = null;
@@ -24,7 +24,7 @@ function Scene(api, path){
 }
 
 Scene.prototype.run = function(){
-    const me = this;
+    var me = this;
     if(!me.config.frames){
         console.warn('No me.config.frames to run');
         return Promise.resolve();
@@ -51,7 +51,7 @@ Scene.prototype.run = function(){
 };
 
 Scene.prototype.applyFrame = function(){
-    const me = this;
+    var me = this;
     if(!me.frame){
         console.warn('applyFrame() missing me.frame property')
     }
@@ -60,7 +60,7 @@ Scene.prototype.applyFrame = function(){
 
             log('vals:', vals);
 
-            let lights = _.filter(me.api.bridge.lights, function(light){
+            var lights = _.filter(me.api.bridge.lights, function(light){
                 return (light.name.toLowerCase().indexOf(vals.query.toLowerCase()) > -1);
             });
 

@@ -1,14 +1,14 @@
 'use strict';
 
-const _ = require('lodash');
-const hue = require('node-hue-api');
-const HueApi = hue.HueApi;
-const lightState = hue.lightState;
-const log = console.log;
-const Promise = require('bluebird');
+var _ = require('lodash');
+var hue = require('node-hue-api');
+var HueApi = hue.HueApi;
+var lightState = hue.lightState;
+var log = console.log;
+var Promise = require('bluebird');
 
 function Api(){
-    let me = this;
+    var me = this;
     me.bridge = require('../config.json');
     Object.keys(me.bridge.lights).forEach(function(key){
         me.bridge.lights[key].id = parseInt(key, 10);
@@ -17,8 +17,8 @@ function Api(){
 }
 
 Api.prototype.setLight = function(light, vals){
-    let me = this;
-    let state = null;
+    var me = this;
+    var state = null;
     return new Promise(function(resolve){
 
         if(vals.rgb) {
@@ -42,16 +42,16 @@ Api.prototype.setLight = function(light, vals){
 };
 
 Api.prototype.setAllLights = function(state){
-    let me = this;
-    let light_ids = Object.keys(me.bridge.lights);
+    var me = this;
+    var light_ids = Object.keys(me.bridge.lights);
     return Promise.all(light_ids.map(function(id){
         return me.setLight(id, state);
     }));
 };
 
 Api.prototype.setAllBrightness = function(val){
-    let me = this;
-    let state = lightState.create().on().white(500, val);
+    var me = this;
+    var state = lightState.create().on().white(500, val);
     return me.setAllLights(state);
 };
 
