@@ -6,6 +6,16 @@ const log = console.log;
 const Promise = require('bluebird');
 
 const api = require('./models/Api');
+const Scene = require('./models/Scene');
+
+module.exports = {
+    
+    apply: function(frames){
+        let scene = new Scene(api, {frames: frames});
+        return scene.run();
+    }
+    
+};
 
 // api.setAllBrightness(10).then(function(result){
 //
@@ -14,8 +24,6 @@ const api = require('./models/Api');
 //     process.exit(0);
 //
 // });
-
-const Scene = require('./models/Scene');
 
 let scene = new Scene(api, './scenes/sample.json');
 

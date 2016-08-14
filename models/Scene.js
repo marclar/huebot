@@ -10,30 +10,43 @@ function Scene(api, path){
     me.api = api;
     me.config = {};
     me.frame = null;
-    if(fs.existsSync(path)){
-        me.config = JSON.parse(fs.readFileSync(path).toString());
+    if(_.isString(path)){
+        if(fs.existsSync(path)){
+            me.config = JSON.parse(fs.readFileSync(path).toString());
+        }
+        else{
+            console.warn('Cannot find path "'+path+'"; continuing with empty config.');
+        }
     }
     else{
-        console.warn('Cannot find path "'+path+'"; continuing with empty config.');
+        me.config = path; //Use parameter as JSON config
     }
 }
 
 Scene.prototype.run = function(){
     const me = this;
     if(!me.config.frames){
-        return;
+        console.warn('No me.config.frames to run');
+        return Promise.resolve();
     }
-    if(!me.frame){
-        me.frame = me.config.frames.shift();
-        log(me.frame);
-        log('Setting me.frame, duration: ', me.frame.duration);
-        me.applyFrame();
-        me.timeout = setTimeout(function(){
-            me.config.frames.push(me.frame);
-            log('Deleting me.frame...');
-            delete me.frame;
-            me.run();
-        }, ((me.frame.duration * 1000) || 1000));
+    else {
+        return new Promise(function(resolve, reject){
+            if(!me.frame){
+                me.frame = me.config.frames.shift();
+                me.applyFrame();
+                resolve(me.frame);
+
+                //Set a timeout?
+                if(me.frame.duration){
+                    me.timeout = setTimeout(function(){
+                        me.config.frames.push(me.frame);
+                        delete me.frame;
+                        me.run();
+                    }, (me.frame.duration * 1000));
+                }
+
+            }
+        });
     }
 };
 
