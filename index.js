@@ -16,7 +16,7 @@ module.exports = {
             clearTimeout(scene.timeout);
         }
         scene = new Scene(api, {frames: frames});
-        return scene.run();
+        return scene.run(); 
     }
     
 };

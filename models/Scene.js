@@ -58,14 +58,11 @@ Scene.prototype.applyFrame = function(){
     else {
         return Promise.all(me.frame.lights.map(function(vals){
 
-            log('vals:', vals);
-
             var lights = _.filter(me.api.bridge.lights, function(light){
                 return (light.name.toLowerCase().indexOf(vals.query.toLowerCase()) > -1);
             });
 
             return Promise.all(lights.map(function(light){
-                log('api light:', light);
                 return me.api.setLight(light, vals);
             }))
 

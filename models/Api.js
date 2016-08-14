@@ -28,7 +28,6 @@ Api.prototype.setLight = function(light, vals){
             state = lightState.create().on().white(vals.white[0], vals.white[1]);
         }
 
-        log('setLightState, light ', light, 'state: ', state);
         return me.api.setLightState(light.id, state, function(err, result) {
             if(err){
                 reject(err);
