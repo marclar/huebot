@@ -1,0 +1,17 @@
+{
+  "frames": [
+    {
+      "duration": 5,
+      "lights": [
+        {
+          "query": "bedroom",
+          "rgb": [200, 200, 0]
+        },
+        {
+          "query": "bar",
+          "white": [500, 50]
+        }
+      ]
+    }
+  ]
+}
